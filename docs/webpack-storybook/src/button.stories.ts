@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { Button } from '@jonthenerd/ui';
 
 const meta = {
-  title: 'Example/Button',
+  title: 'Not Working/Importing the button into the story directly',
   component: Button,  
   tags: ['autodocs'],    
   args: { onClick: fn() },

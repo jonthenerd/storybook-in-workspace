@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { LocalButton } from './local-button';
 
 const meta = {
-  title: 'Example/LocalButton',
+  title: 'Working/Local component',
   component: LocalButton,  
   tags: ['autodocs'],    
   args: { onClick: fn() },

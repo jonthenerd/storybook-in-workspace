@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { ExtendedButton } from "./extended-button";
 
 const meta = {
-  title: 'Example/ExtendedButton',
+  title: 'Not Working/Extending the Button Interface',
   component: ExtendedButton,  
   tags: ['autodocs'],    
   args: { onClick: fn() },
