@@ -2,9 +2,8 @@ import type { StorybookConfig } from '@storybook/react-vite';
 
 // The config that Storybook ships with
 const vanillaConfig: StorybookConfig = {
-  "stories": [
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  "stories": [    
+    "../src/**/*.stories.@(ts|tsx)"
   ],
   "addons": [
     "@storybook/addon-essentials",    
