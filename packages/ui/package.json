@@ -7,6 +7,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./src": {
+      "import": "./src/index.ts"
+    },
+    "./src/*": {
+      "import": "./src/*"
     }
   },
   "scripts": {

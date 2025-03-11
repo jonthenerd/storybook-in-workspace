@@ -1,21 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { ExtendedButton } from "./extended-button";
+import { Button } from '@jonthenerd/ui/src';
 
 const meta = {
-  title: 'Not Working/Extending the Button Interface',
-  component: ExtendedButton,  
+  title: 'Working/Import using exported barrel source file',
+  component: Button,  
   tags: ['autodocs'],    
   args: { onClick: fn() },
-} satisfies Meta<typeof ExtendedButton>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {    
-    label: 'LocalButton',
-    title: "Title goes here"
+    label: 'Button',
   },
 };

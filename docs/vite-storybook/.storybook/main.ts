@@ -27,16 +27,81 @@ const tsConfig1: StorybookConfig = {
 const tsConfig2: StorybookConfig = {
   ...tsConfig1,
   typescript: {
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: "react-docgen",
     reactDocgenTypescriptOptions: {
       compilerOptions: {
         allowSyntheticDefaultImports: false,
         esModuleInterop: false
       },
-      propFilter: (prop) =>
-        prop.parent ? !/node_modules\/(?!@jonthenerd)/.test(prop.parent.fileName) : true,
+      propFilter: (prop) => {
+        console.log("Hi!");
+        return true;
+        //prop.parent ? !/node_modules\/(?!@jonthenerd)/.test(prop.parent.fileName) : true,
+      }
     }
   }
 }
 
-export default tsConfig2;
+// Suggested configuration from https://github.com/storybookjs/storybook/issues/30767#issuecomment-2705031679
+const aiSuggestedConfig: StorybookConfig = {
+  ...vanillaConfig,   
+  typescript: {     
+    reactDocgen: 'react-docgen-typescript',     
+    check: false,         
+    reactDocgenTypescriptOptions: {       
+      shouldExtractLiteralValuesFromEnum: true,       
+      shouldRemoveUndefinedFromOptional: true,       
+      propFilter: (prop) => {     
+        const decision = prop.parent ? !/node_modules/.test(prop.parent.fileName) : true
+        console.log("Got one! " + prop.parent?.fileName + " " + decision); 
+        return decision;       
+      },       
+      //include: ["../../packages/**/*.{ts,tsx}"]  // Adjust path to your workspace packages     
+    }   
+  } 
+}
+
+// From https://github.com/storybookjs/storybook/issues/30015#issuecomment-2536640555
+const configWithTsConfigPath: StorybookConfig = {
+  ...vanillaConfig,
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      tsconfigPath: "./tsconfig.app.json", // This was required to show props from the extended component.
+      propFilter: (prop) => {        
+        const decision = prop.parent ? !/node_modules/.test(prop.parent.fileName) : true
+        console.log("Got one! " + prop.parent?.fileName + " " + decision); 
+        return decision;       
+      },      
+    }
+  }
+}
+
+// Works with all but importing from the package barrel
+// Combines include prop from https://github.com/storybookjs/storybook/issues/30767#issuecomment-2705031679
+// And tsconfigPath from https://github.com/storybookjs/storybook/issues/30015#issuecomment-2536640555
+const aiSuggestedConfig2: StorybookConfig = {
+  ...vanillaConfig,
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      tsconfigPath: "./tsconfig.app.json", // This was required to show props from the extended component.
+      propFilter: (prop) => {        
+        const decision = prop.parent ? !/node_modules/.test(prop.parent.fileName) : true
+        console.log("Got one! " + prop.parent?.fileName + " " + decision); 
+        return decision;       
+      },      
+      include: ["src/**/*.{ts,tsx}", "../../packages/ui/**/*.{ts,tsx}"]
+    }
+  }
+}
+
+const tryingReactDocgenAgain: StorybookConfig = {
+  ...vanillaConfig,
+  typescript: {
+    reactDocgen: "react-docgen"    
+  }
+}
+
+
+export default tryingReactDocgenAgain;

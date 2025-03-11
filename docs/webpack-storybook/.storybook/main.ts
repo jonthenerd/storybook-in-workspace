@@ -1,6 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 
 const vanillaConfig: StorybookConfig = {
+  logLevel: "debug",
   stories: [    
     "../src/**/*.stories.@(ts|tsx)"
   ],
@@ -78,7 +79,25 @@ const adjustedWebpack2: StorybookConfig = {
         }
       });
       return config;
-  }
+  }  
 }
 
-export default adjustedWebpack2;
+// Suggested configuration from https://github.com/storybookjs/storybook/issues/30767#issuecomment-2705031679
+const aiSuggestedConfig: StorybookConfig = {
+  ...vanillaConfig,   
+  typescript: {     
+    reactDocgen: 'react-docgen-typescript',     
+    check: false,         
+    reactDocgenTypescriptOptions: {       
+      shouldExtractLiteralValuesFromEnum: true,       
+      shouldRemoveUndefinedFromOptional: true,       
+      propFilter: (prop) => {     
+        console.log("Got one!" + prop.parent?.fileName); // This never logs anything.
+        return prop.parent ? !/node_modules/.test(prop.parent.fileName) : true;       
+      },       
+      //include: ["../../packages/**/*.{ts,tsx}"]  // Adjust path to your workspace packages     
+    }   
+  } 
+}
+
+export default aiSuggestedConfig;

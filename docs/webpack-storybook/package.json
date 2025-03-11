@@ -21,6 +21,7 @@
     "@storybook/react": "8.6.4",
     "@storybook/react-webpack5": "8.6.4",
     "@storybook/test": "8.6.4",
+    "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "storybook": "8.6.4",
     "ts-loader": "^9.5.2",
